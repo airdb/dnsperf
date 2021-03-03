@@ -54,7 +54,12 @@ func (ptr *PtrClient)  request(c *dns.Client,  ip string) {
 	if !strings.Contains( ptr.DNSServer, ":") {
 		upaddr += ":53"
 	}
-	conn, _ := c.Dial(upaddr)
+
+	conn, err := c.Dial(upaddr)
+	if err != nil {
+		log.Println(err)
+		return
+	}
 
 	resp, _, err := c.ExchangeWithConn(msg, conn)
 	if err != nil || resp == nil {
