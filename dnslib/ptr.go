@@ -61,6 +61,8 @@ func (ptr *PtrClient)  request(c *dns.Client,  ip string) {
 		return
 	}
 
+	defer conn.Close()
+
 	resp, _, err := c.ExchangeWithConn(msg, conn)
 	if err != nil || resp == nil {
 		log.Println(err)
