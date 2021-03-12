@@ -36,8 +36,21 @@ to quickly create a Cobra application.`,
 	},
 }
 
+// ptrCmd represents the query command
+var aRecordCmd = &cobra.Command{
+	Use:   "a",
+	Short: "A brief description of your command",
+	Long: `A to quickly create a Cobra application.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		client := dnslib.PtrClient{DNSServer: ptrFlag.DNSServer}
+		client.AA()
+	},
+}
+
+
 func init() {
 	rootCmd.AddCommand(ptrCmd)
+	rootCmd.AddCommand(aRecordCmd)
 
 	ptrCmd.PersistentFlags().StringVarP(&ptrFlag.DNSServer, "dns-server", "", "8.8.8.8", "config file (default is $HOME/.dnstest.yaml)")
 }
