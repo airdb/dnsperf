@@ -43,7 +43,7 @@ var aRecordCmd = &cobra.Command{
 	Long: `A to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		client := dnslib.PtrClient{DNSServer: ptrFlag.DNSServer}
-		client.AA()
+		client.StressRecordA()
 	},
 }
 
